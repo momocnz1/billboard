@@ -3,6 +3,9 @@ import './App.css';
 import '@fontsource/inter'; 
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './page/Home'
+import axios from 'axios';
+import React, { useState } from 'react';
+
 
 function App() {
   return (
@@ -19,15 +22,27 @@ function App() {
 
 function Login(){
   const navigate = useNavigate();
-  const handleHome = (e) =>{
-    e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
+  const [errorMessage, setErrorMessage] = useState('');
+  const [credentials, setCredentials] = useState({ usernameOrEmail: '', password: '' });
 
-    if (username === 'correctUsername' && password === 'correctPassword') {
+  
+  const handleHome = async (e) =>{
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:8000/auth/login', credentials
+);
+      console.log(response.data);
       navigate('/home');
-    } else {
-      alert('Incorrect username or password');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage('รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง');
+      } else if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
+        console.log(error.response.data.message)
+      }
     }
   }
 
