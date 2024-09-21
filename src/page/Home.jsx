@@ -289,7 +289,7 @@ export default function Home() {
               />
             </div>
             ))}
-            {index < displayedYears.length - 1 && <hr className="border-t-2 border-gray-400 my-5" />}
+            {index < displayedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
           </div>
         </div>
       ))}
