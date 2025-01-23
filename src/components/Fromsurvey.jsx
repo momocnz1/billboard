@@ -72,7 +72,7 @@ export default function Fromsurvey({ onClose }) {
   };
 
   return (
-    <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50  '>
+    <div className=' h fixed inset-0 flex justify-center items-center bg-black bg-opacity-50  '>
       <div className='bg-cruise-500 text-white p-8 m-4 font-medium  rounded-xl shadow-md w-11/12 max-w-full'>
         <p className='my-2'>ประเภทป้ายภาษี</p>
         <div >
